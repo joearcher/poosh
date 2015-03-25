@@ -67,11 +67,12 @@ Edit the `.env` file to suite your needs (remember you'll need the shared secret
 
 Run Poosh (we recommend using `forever`) with `forever start --spinSleepTime 10000 app.js`
 
-#Credits
+##Credits
 [Express.js](http://expressjs.com)
+
 [Socket.io](http://socket.io)
 
-#License
+##License
 MIT
 
 
