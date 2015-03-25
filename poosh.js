@@ -8,6 +8,15 @@ var api = require('http').Server(apiServer).listen(process.env.SERVER_PORT);
 var middleware = require('./middleware');
 var SECRET = process.env.SERVER_SECRET;
 
+//stop execution if secret is not set
+if(SECRET == null || SECRET == ""){
+	throw new Error("Configuration error - You must set a SERVER_SECRET in the .env file");
+}
+//check the secret is of a rational, size >9 chars
+if(SECRET.length < 10){
+	throw new Error("Configuration error - Secret should be at least 10 characters");
+}
+
 //requires for websocket clients
 var app = require('express')();
 var server = require('http').Server(app).listen(process.env.CLIENT_PORT);
