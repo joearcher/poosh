@@ -18,6 +18,8 @@ Poosh uses [Dotenv](https://www.npmjs.com/package/dotenv) for configuration ther
 `SERVER_SECRET` (Default: none) - The shared secret on which token authentication is based.
 
 ##How it works
+![Poosh diagram](http://imgur.com/DcHezQw)
+
 Clients connect to the server using the socket.io client library on the configured client port. 
 This may look something like this in an html file.
 
@@ -44,14 +46,15 @@ The POST body must be a JSON object with the following prototype:
 	} 
 }
 ````
-The POST headers must contain an `authorization` header who's value is a token. The token should be an SHA1 hash of the SERVER_SECRET and the JSON encoded payload. In PHP this would look like
+The POST headers must contain an `authorization` header who's value is a token. The token should be an SHA1 hash of the SERVER_SECRET and the JSON encoded payload. In PHP this process would look like:
 
 ````
-$secret = 'yugdki8U89Jikkjs'
+$secret = 'thisisthesharedsecret'
 $payload = json_encode(['key1' => 'value1', 'key2' => 'value2']);
 $token = sha1($secret.$payload);
 ````
 
 This ensures that push message requests can only come from a server which has the shared secret, and that the payload cannot be modified in transit without the token being incorrect.
 
+The POST request should also include a `content-type: application/json` header so the body is correctly decoded by Poosh.
 
