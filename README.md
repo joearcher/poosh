@@ -18,7 +18,7 @@ Poosh uses [Dotenv](https://www.npmjs.com/package/dotenv) for configuration ther
 `SERVER_SECRET` (Default: none) - The shared secret on which token authentication is based.
 
 ##How it works
-![Poosh diagram](http://imgur.com/DcHezQw?raw=true)
+![Poosh diagram](https://raw.githubusercontent.com/joearcher/poosh/gh-pages/images/poosh-diagram.png?raw=true)
 
 Clients connect to the server using the socket.io client library on the configured client port. 
 This may look something like this in an html file.
