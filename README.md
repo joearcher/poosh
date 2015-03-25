@@ -43,6 +43,7 @@ The POST body must be a JSON object with the following prototype:
 	payload:{
 		key1: "value1",
 		key2: "value2"
+		...
 	} 
 }
 ````
