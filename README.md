@@ -59,6 +59,8 @@ This ensures that push message requests can only come from a server which has th
 
 The POST request should also include a `content-type: application/json` header so the body is correctly decoded by Poosh.
 
+**Have a look at our [Laravel package](https://github.com/joearcher/Poosh-Laravel) which makes sending messages with Poosh from Laravel apps, super easy**
+
 ##Running Poosh
 Clone this repo `git clone https://github.com/joearcher/poosh.git poosh`.
 
