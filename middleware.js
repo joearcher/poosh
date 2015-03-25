@@ -10,7 +10,7 @@ module.exports = {
 
 	    	//stringify the payload for hashing
 	    	payload = JSON.stringify(req.body.payload);
-	    	
+
 	    	//make the hash
 	    	hash = sha1(SECRET+payload);
 
