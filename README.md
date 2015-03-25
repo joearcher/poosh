@@ -13,7 +13,7 @@ Poosh uses [Dotenv](https://www.npmjs.com/package/dotenv) for configuration ther
 
 `CLIENT_PORT` (Default: 8000) - The port number on which the websocket clients should connect.
 
-`SERVER_PORT` (Default: 1337) - The port number on which the server listens for POST requests.
+`SERVER_PORT` (Default: 1337) - The port number on which Poosh listens for POST requests.
 
 `SERVER_SECRET` (Default: none) - The shared secret on which token authentication is based.
 
@@ -23,13 +23,13 @@ Poosh uses [Dotenv](https://www.npmjs.com/package/dotenv) for configuration ther
 Clients connect to the server using the socket.io client library on the configured client port. 
 This may look something like this in an html file.
 
-````
+````javascript
 <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
 	<script>
 	  var socket = io.connect('http://pooshserver:8000');
 	  
 	  socket.on('event-name',function(data){
-	  	{... do something with the received data ...}
+	  	{... do something with the received payload ...}
 	  });
 </script>
 ````
@@ -37,7 +37,7 @@ This may look something like this in an html file.
 Your application can then make POST requests to Poosh in the following manner.
 
 The POST body must be a JSON object with the following prototype:
-````
+````javascript
 {
 	event: "event-name",
 	payload:{
@@ -48,7 +48,7 @@ The POST body must be a JSON object with the following prototype:
 ````
 The POST headers must contain an `authorization` header who's value is a token. The token should be an SHA1 hash of the SERVER_SECRET and the JSON encoded payload. In PHP this process would look like:
 
-````
+````PHP
 $secret = 'thisisthesharedsecret'
 $payload = json_encode(['key1' => 'value1', 'key2' => 'value2']);
 $token = sha1($secret.$payload);
@@ -57,4 +57,21 @@ $token = sha1($secret.$payload);
 This ensures that push message requests can only come from a server which has the shared secret, and that the payload cannot be modified in transit without the token being incorrect.
 
 The POST request should also include a `content-type: application/json` header so the body is correctly decoded by Poosh.
+
+##Running Poosh
+Clone this repo `git clone https://github.com/joearcher/poosh.git poosh`.
+
+Install the dependencies `npm install`.
+
+Edit the `.env` file to suite your needs (remember you'll need the shared secret to make requests).
+
+Run Poosh (we recommend using `forever`) with `forever start --spinSleepTime 10000 app.js`
+
+#Credits
+[Express.js](http://expressjs.com)
+[Socket.io](http://socket.io)
+
+#License
+MIT
+
 
