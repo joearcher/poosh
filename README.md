@@ -65,7 +65,7 @@ Install the dependencies `npm install`.
 
 Edit the `.env` file to suite your needs (remember you'll need the shared secret to make requests).
 
-Run Poosh (we recommend using `forever`) with `forever start --spinSleepTime 10000 app.js`
+Run Poosh (we recommend using `forever`) with `forever start --spinSleepTime 10000 poosh.js`
 
 ##Credits
 [Express.js](http://expressjs.com)
