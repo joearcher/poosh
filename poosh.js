@@ -31,14 +31,14 @@ apiServer.use(bodyParser.json());
 apiServer.use(middleware.tokenCheck(SECRET));
 
 //function to broadcast event to all clients
-apiServer.send = function(event,data){
-	io.emit(event,data);
+apiServer.send = function(room,event,data){
+	io.to(room).emit(event,data);
 	return true;
 }
 
 //broadcasts payload to all connected clients listening for the event
 apiServer.post('/send',function(req,res){
-	apiServer.send(req.body.event,req.body.payload);
+	apiServer.send(req.body.room,req.body.event,req.body.payload);
 	res.end();
 });
 
@@ -53,7 +53,3 @@ app.get('*',function(req, res){
 	res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({ message: 'You\'re not a websocket client!'}));
 });
-
-
-
-
