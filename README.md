@@ -2,9 +2,9 @@
 ###Simple websocket push messaging server.
 
 ##Introduction
-Poosh is a simple websocket push messaging server based on [Express.js](http://expressjs.com/) and [Socket.io](http://socket.io). It consists of an Express application which listens on two configurable ports. 
+Poosh is a simple websocket push messaging server based on [Express.js](http://expressjs.com/) and [Socket.io](http://socket.io). It consists of an Express application which listens on two configurable ports.
 
-A "client" port to which socket.io clients connect and through which messages are pushed. 
+A "client" port to which socket.io clients connect and through which messages are pushed.
 
 And a "server" port which accepts token authenticated POST requests on which the push messages are based.
 
@@ -20,14 +20,14 @@ Poosh uses [Dotenv](https://www.npmjs.com/package/dotenv) for configuration ther
 ##How it works
 ![Poosh diagram](https://raw.githubusercontent.com/joearcher/poosh/gh-pages/images/poosh-diagram.png?raw=true)
 
-Clients connect to the server using the socket.io client library on the configured client port. 
+Clients connect to the server using the socket.io client library on the configured client port.
 This may look something like this in an html file.
 
 ````javascript
 <script src="https://cdn.socket.io/socket.io-1.3.4.js"></script>
 	<script>
 	  var socket = io.connect('http://pooshserver:8000');
-	  
+
 	  socket.on('event-name',function(data){
 	  	{... do something with the received payload ...}
 	  });
@@ -39,12 +39,13 @@ Your application can then make POST requests to Poosh in the following manner.
 The POST body must be a JSON object with the following prototype:
 ````javascript
 {
+	room: "room name",
 	event: "event-name",
 	payload:{
 		key1: "value1",
 		key2: "value2"
 		...
-	} 
+	}
 }
 ````
 The POST headers must contain an `authorization` header who's value is a token. The token should be an SHA1 hash of the SERVER_SECRET and the JSON encoded payload. In PHP this process would look like:
@@ -77,5 +78,3 @@ Run Poosh (we recommend using `forever`) with `forever start --spinSleepTime 100
 
 ##License
 MIT
-
-

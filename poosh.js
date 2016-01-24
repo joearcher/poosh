@@ -30,6 +30,13 @@ apiServer.use(bodyParser.json());
 //token is an md5 of the shared secret and the timestamp.
 apiServer.use(middleware.tokenCheck(SECRET));
 
+io.sockets.on('connection', function(socket) {
+    // once a client has connected, we expect to get a ping from them saying what room they want to join
+    socket.on('room', function(room) {
+        socket.join(room);
+    });
+});
+
 //function to broadcast event to all clients
 apiServer.send = function(room,event,data){
 	io.to(room).emit(event,data);
