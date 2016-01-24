@@ -40,12 +40,14 @@ io.sockets.on('connection', function(socket) {
 //function to broadcast event to all clients
 apiServer.send = function(room,event,data){
 	io.to(room).emit(event,data);
+	console.log('event emitted to ' + room);
 	return true;
 }
 
 //broadcasts payload to all connected clients listening for the event
 apiServer.post('/send',function(req,res){
 	apiServer.send(req.body.room,req.body.event,req.body.payload);
+	console.log('send event received');
 	res.end();
 });
 
