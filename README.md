@@ -1,14 +1,15 @@
-#Poosh
-###Simple websocket push messaging server.
+# Poosh
 
-##Introduction
+### Simple websocket push messaging server.
+
+## Introduction
 Poosh is a simple websocket push messaging server based on [Express.js](http://expressjs.com/) and [Socket.io](http://socket.io). It consists of an Express application which listens on two configurable ports.
 
 A "client" port to which socket.io clients connect and through which messages are pushed.
 
 And a "server" port which accepts token authenticated POST requests on which the push messages are based.
 
-##Configuration
+## Configuration
 Poosh uses [Dotenv](https://www.npmjs.com/package/dotenv) for configuration there are 3 configuration options stored in the .env file.
 
 `CLIENT_PORT` (Default: 8000) - The port number on which the websocket clients should connect.
@@ -17,7 +18,7 @@ Poosh uses [Dotenv](https://www.npmjs.com/package/dotenv) for configuration ther
 
 `SERVER_SECRET` (Default: none) - The shared secret on which token authentication is based.
 
-##How it works
+## How it works
 ![Poosh diagram](https://raw.githubusercontent.com/joearcher/poosh/gh-pages/images/poosh-diagram.png?raw=true)
 
 Clients connect to the server using the socket.io client library on the configured client port.
@@ -48,6 +49,7 @@ The POST body must be a JSON object with the following prototype:
 	}
 }
 ````
+
 The POST headers must contain an `authorization` header who's value is a token. The token should be an SHA1 hash of the SERVER_SECRET and the JSON encoded payload. In PHP this process would look like:
 
 ````PHP
@@ -62,7 +64,7 @@ The POST request should also include a `content-type: application/json` header s
 
 **Have a look at our [Laravel package](https://github.com/joearcher/Poosh-Laravel) which makes sending messages with Poosh from Laravel apps, super easy**
 
-##Running Poosh
+## Running Poosh
 Clone this repo `git clone https://github.com/joearcher/poosh.git poosh`.
 
 Install the dependencies `npm install`.
@@ -71,7 +73,7 @@ Edit the `.env` file to suite your needs (remember you'll need the shared secret
 
 Run Poosh (we recommend using `forever`) with `forever start --spinSleepTime 10000 poosh.js`
 
-##Credits
+## Credits
 [Express.js](http://expressjs.com)
 
 [Socket.io](http://socket.io)
